@@ -11,3 +11,20 @@ const sayHello = (name : string) => {
 sayHello('John');
 sayHello(24);
 sayHello();
+
+const doSomething = (person : string, age : number, isFunny : boolean) => {
+};
+
+doSomething('John', 35, false);
+doSomething('John', 35, 'Yes');
+doSomething('John', 35, true, 45);
+
+
+
+// Default Parameters
+
+const sayHi = (name : string = 'stranger') => {
+    console.log(`Hi, ${name}`);
+};
+
+sayHi();
