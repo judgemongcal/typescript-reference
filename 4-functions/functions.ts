@@ -44,7 +44,7 @@ colors.map(color => {
     return color.toFixed(); // Won't work since colors is initially declared as an string array. TS takes the type of the variable being used in map
 });
 
-// Void Type = for functions with no return values
+// Void Type = for functions with undefined return values
 function printTwice(message : string): void {
     console.log(message);
     console.log(message);
@@ -55,4 +55,10 @@ function printTwice(message : string): void {
 
 function makeError(msg : string) : never{
     throw new Error(msg);
+}
+
+function gameLoop () : never{
+    while(true){
+        console.log('Game loop');
+    }
 }
