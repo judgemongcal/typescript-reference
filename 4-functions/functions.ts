@@ -28,3 +28,31 @@ const sayHi = (name : string = 'stranger') => {
 };
 
 sayHi();
+
+// Return Type Annotations 
+
+const addNums = (x: number, y: number): number => {
+    return x * y;
+};
+
+
+// Anonymous Function Contextual Typing
+
+const colors = ['red' ,'blue', 'yellow'];
+colors.map(color => {
+    return color.toUpperCase();
+    return color.toFixed(); // Won't work since colors is initially declared as an string array. TS takes the type of the variable being used in map
+});
+
+// Void Type = for functions with no return values
+function printTwice(message : string): void {
+    console.log(message);
+    console.log(message);
+};
+
+
+// Never Type = function should never have a chance to return anything
+
+function makeError(msg : string) : never{
+    throw new Error(msg);
+}
