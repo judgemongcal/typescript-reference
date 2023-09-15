@@ -11,3 +11,12 @@ let coordinate: {x:number, y:number} = {x:34, y:72}; // Valid
 function randomCoords () : {x:number, y:number} { // Valid; for multiple return values
     return {x: Math.random(), y: Math.random() * 2};
 }
+
+// Order of arguments passed can be not in the same order as defined in the function params
+
+// Excess Properties
+printName({first: 'John', last: 'Doe', age: 41}); // Inline: Will have error since age is not defined in the function params
+
+const singer = {first: 'John', last: 'Doe', age: 41};
+
+printName(singer); // Will work but TS will just get the needed arguments for the function's params and just neglect the other args.
