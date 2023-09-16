@@ -80,3 +80,66 @@ const mySong : Song = {
 const earnings = calculatePayout(mySong);
 console.log(earnings);
 printSong(mySong);
+
+
+// Optional Properties
+
+type Point = {
+    x: number;
+    y: number;
+    z?: number;
+};
+
+
+const myPoint : Point = {x: 1, y: 3, z:5};
+const myPoint2 : Point = {x: 1, y: 3,}; // Still valid since z is declared as optional
+
+
+// Readonly Modifier
+
+type User = {
+    readonly id: number;
+    username: string;
+};
+
+const user: User = {
+    id: 42,
+    username: 'username'
+}
+
+console.log(user.id);
+// user.id = 23; // Will not work since user.id is declared as readonly
+
+
+// Intersection Types
+
+type Circle = {
+    radius: number;
+};
+
+type Colorful = {
+    color: string;
+};
+
+type ColorfulCircle = Circle & Colorful; // Intersects multiple types
+
+const happyFace: ColorfulCircle = {
+    radius: 4,
+    color: 'Orange',
+};
+
+type Cat = {
+    numLives: number
+};
+
+type Dog = {
+    breed: String
+};
+
+type CatDog = Cat & Dog & {age: number;};
+
+const thomas : CatDog = {
+    numLives: 4,
+    breed: 'Golden Retriever',
+    age: 10
+};
