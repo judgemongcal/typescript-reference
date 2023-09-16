@@ -2,9 +2,9 @@ const printName = (person: {first : string, last: string}) : void => {
     console.log(`${person.first} ${person.last}`);
 };
 
-printName({first:"Elton", last:"John"});
-printName({first:"Elton"}); // Missing argument
-printName({first: 23, last:'Doe'}); // Incorrect data type
+// printName({first:"Elton", last:"John"});
+// printName({first:"Elton"}); // Missing argument
+// printName({first: 23, last:'Doe'}); // Incorrect data type
 
 let coordinate: {x:number, y:number} = {x:34, y:72}; // Valid
 
@@ -17,7 +17,7 @@ function randomCoords () : {x:number, y:number} { // Valid; for multiple return 
 
 
 // Excess Properties
-printName({first: 'John', last: 'Doe', age: 41}); // Inline: Will have error since age is not defined in the function params
+// printName({first: 'John', last: 'Doe', age: 41}); // Inline: Will have error since age is not defined in the function params
 
 const singer = {first: 'John', last: 'Doe', age: 41};
 
@@ -40,3 +40,43 @@ const checkCourse = (entry : Course) => { //Used reference type named Course
 }
 
 checkCourse({name: 'TypeScript 2023', duration: 10, instructor: 'Colt Steele'});
+
+
+
+
+// Nested Object Type Annotation
+
+type Song = {
+    title: string,
+    artists: string,
+    numStreams: number,
+    credits: {
+        producer: string,
+        writer: string
+    }
+};
+
+function calculatePayout(song: Song) : number{
+    return song.numStreams * 0.0033;
+}
+
+function printSong(song: Song) : void{
+    console.log(`${song.title} is produced by ${song.credits.producer} and written by ${song.credits.writer}. 
+    It currently has ${song.numStreams} streams`);
+}
+
+
+const mySong : Song = {
+        title: 'Unchained Melody',
+        artists: 'Righteous Brothers',
+        numStreams: 1232441,
+        credits: {
+            producer: 'Phil Spector',
+            writer: 'ALex North'
+        }
+
+    };
+
+const earnings = calculatePayout(mySong);
+console.log(earnings);
+printSong(mySong);
