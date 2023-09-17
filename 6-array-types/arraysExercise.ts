@@ -8,7 +8,9 @@ type Product = {
     price: number
 };
 
-const getTotal = (products : Product[]) => {
+
+// Part 4
+const getTotal = (products : Product[]) : number => {
     let total: number = 0;
     products.forEach((product) => {
         total += product.price
