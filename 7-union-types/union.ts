@@ -33,6 +33,15 @@ function calcTax(price: number | string, tax: number) : number {
         return price * tax;
     
 }
+
+// Union Type and Arrays
+
+const stuff: (number | string)[] = [2,4,5,6,'fsfsfsf'];
+
+const coords : (Point | Loc)[] = [];
+
+coords.push({x: 23, y: 42});
+coords.push({lat: 243, long: 421});
     
 
    
