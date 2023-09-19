@@ -39,4 +39,13 @@ enum ArrowKeys {
     DOWN = "down",
     LEFT = "left",
     RIGHT = "right",
-}
+    LVL = 324,
+} // This method adds a lot of JS
+
+const enum Arrows {
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT,
+} /* Turning the enum into a const makes the compiler take the value of the Arrows
+ instead of using "Arrows.(DIRECTION) when TS in compiled to JS" */
