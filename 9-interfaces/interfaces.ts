@@ -57,3 +57,65 @@ const shoes: Product = {
 };
 
 console.log(shoes.applyDiscount(0.5));
+
+// Reopening Interfaces
+
+interface Dog {
+	name: string;
+	age: number;
+}
+
+interface Dog {
+	breed: string;
+	bark(): string;
+}
+
+const elton: Dog = {
+	name: "Elton",
+	age: 0.5,
+	breed: "Golden Retriever",
+	bark() {
+		return "woof";
+	},
+};
+
+// Extending Interfaces - not limited to single inheritance
+
+interface ServiceDog extends Dog {
+	job:
+		| "drug sniffer"
+		| "bomb"
+		| "guide";
+}
+
+const olive: ServiceDog = {
+	name: "olive",
+	age: 5,
+	breed: "shih tzu",
+	bark() {
+		return "woof woof";
+	},
+	job: "guide",
+};
+
+// Interface Multi Inheritance
+
+interface Person {
+	name: string;
+}
+
+interface Employee extends Person {
+	readonly id: number;
+	email: string;
+}
+
+interface Engineer
+	extends Person,
+		Employee {
+	position: string;
+	level: string;
+	languages: string[];
+}
+
+
+const harold : Engineer = {name:'Harold',id:4554,email:'harold@gmail.com', position:'Software Engineer',level:'Tech Lead', languages: ['JavaScript', 'Rust', 'GoLang']}
