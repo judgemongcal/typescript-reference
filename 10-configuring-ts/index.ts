@@ -9,3 +9,9 @@ const norma: Chicken = {
     eggsPerWeek: 4,
     name: 'norma'
 }
+
+const jen: Chicken = {
+    breed: 'Silkie',
+    eggsPerWeek: 6,
+    name: 'jen'
+}
