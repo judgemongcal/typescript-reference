@@ -100,22 +100,51 @@ const olive: ServiceDog = {
 
 // Interface Multi Inheritance
 
-interface Person {
+interface Person2 {
 	name: string;
 }
 
-interface Employee extends Person {
+interface Employee extends Person2 {
 	readonly id: number;
 	email: string;
 }
 
 interface Engineer
-	extends Person,
+	extends Person2,
 		Employee {
 	position: string;
 	level: string;
 	languages: string[];
 }
 
+const harold: Engineer = {
+	name: "Harold",
+	id: 4554,
+	email: "harold@gmail.com",
+	position: "Software Engineer",
+	level: "Tech Lead",
+	languages: [
+		"JavaScript",
+		"Rust",
+		"GoLang",
+	],
+};
 
-const harold : Engineer = {name:'Harold',id:4554,email:'harold@gmail.com', position:'Software Engineer',level:'Tech Lead', languages: ['JavaScript', 'Rust', 'GoLang']}
+/* Type Alias v Interfaces
+
+Interfaces 
+- creates reusable, modular types to describe objects
+- only describes the shape of an object
+- can be re-opened
+- can be extended/inherited
+
+Type Alias
+- Can be used as an alias for any type
+- cannot be re-opened
+- can only be extended with intersection types
+
+
+
+
+
+*/
