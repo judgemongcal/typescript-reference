@@ -13,18 +13,16 @@ const list = document.querySelector("#todo-list");
 // const numChars = (mystery as String).length; // Type Assertion just for this line
 // console.log(numChars);
 // Type Assertion in DOM
-const getTodos = () => {
-    const todosJSON = localStorage.getItem("todos");
-    if (todosJSON === null)
+const readTodos = () => {
+    const todoJSON = localStorage.getItem("todos");
+    if (todoJSON === null)
         return [];
-    return JSON.parse(todosJSON);
+    return JSON.parse(todoJSON);
 };
-const initTodo = () => {
-    const todos = getTodos();
-    todos.forEach((todo) => {
-        createTodo(todo);
-    });
+const saveTodos = () => {
+    localStorage.setItem("todos", JSON.stringify(todos));
 };
+let todos = readTodos();
 const handleSubmit = (e) => {
     e.preventDefault();
     const newTodo = {
@@ -33,7 +31,7 @@ const handleSubmit = (e) => {
     };
     createTodo(newTodo);
     todos.push(newTodo);
-    localStorage.setItem("todos", JSON.stringify(todos));
+    saveTodos();
     input.value = "";
 };
 const createTodo = (todo) => {
@@ -42,7 +40,17 @@ const createTodo = (todo) => {
     list.appendChild(newLi);
     const checkBox = document.createElement("input");
     checkBox.type = "checkbox";
+    checkBox.checked = todo.completed;
+    checkBox.addEventListener("change", function () {
+        todo.completed = checkBox.checked;
+        saveTodos();
+    });
     newLi.append(checkBox);
 };
+const loadFromDB = () => {
+    todos.forEach((todo) => {
+        createTodo(todo);
+    });
+};
 form.addEventListener("submit", handleSubmit);
-document.addEventListener("DOMContentLoaded", initTodo);
+document.addEventListener("DOMContentLoaded", loadFromDB);

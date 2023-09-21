@@ -23,18 +23,17 @@ interface Todo {
 
 // Type Assertion in DOM
 
-const getTodos = (): Todo[] => {
-	const todosJSON = localStorage.getItem("todos");
-	if (todosJSON === null) return [];
-	return JSON.parse(todosJSON);
+const readTodos = (): Todo[] => {
+	const todoJSON = localStorage.getItem("todos");
+	if (todoJSON === null) return [];
+	return JSON.parse(todoJSON);
 };
 
-const initTodo = () => {
-	const todos: Todo[] = getTodos();
-	todos.forEach((todo) => {
-		createTodo(todo);
-	});
+const saveTodos = () => {
+	localStorage.setItem("todos", JSON.stringify(todos));
 };
+
+let todos: Todo[] = readTodos();
 
 const handleSubmit = (e: SubmitEvent) => {
 	e.preventDefault();
@@ -44,7 +43,7 @@ const handleSubmit = (e: SubmitEvent) => {
 	};
 	createTodo(newTodo);
 	todos.push(newTodo);
-	localStorage.setItem("todos", JSON.stringify(todos));
+	saveTodos();
 	input.value = "";
 };
 
@@ -54,8 +53,19 @@ const createTodo = (todo: Todo) => {
 	list.appendChild(newLi);
 	const checkBox = document.createElement("input");
 	checkBox.type = "checkbox";
+	checkBox.checked = todo.completed;
+	checkBox.addEventListener("change", function () {
+		todo.completed = checkBox.checked;
+		saveTodos();
+	});
 	newLi.append(checkBox);
 };
 
+const loadFromDB = () => {
+	todos.forEach((todo) => {
+		createTodo(todo);
+	});
+};
+
 form.addEventListener("submit", handleSubmit);
-document.addEventListener("DOMContentLoaded", initTodo);
+document.addEventListener("DOMContentLoaded", loadFromDB);
