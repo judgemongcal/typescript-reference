@@ -3,6 +3,11 @@ const input = document.querySelector("#todo-input")! as HTMLInputElement;
 const form = document.querySelector("#todo-form")! as HTMLFormElement;
 const list = document.querySelector("#todo-list")!;
 
+interface Todo {
+	text: string;
+	completed: boolean;
+}
+
 // btn.addEventListener("click", function () {
 // 	// alert("Clicked");
 // 	alert(input.value);
@@ -18,16 +23,39 @@ const list = document.querySelector("#todo-list")!;
 
 // Type Assertion in DOM
 
+const getTodos = (): Todo[] => {
+	const todosJSON = localStorage.getItem("todos");
+	if (todosJSON === null) return [];
+	return JSON.parse(todosJSON);
+};
+
+const initTodo = () => {
+	const todos: Todo[] = getTodos();
+	todos.forEach((todo) => {
+		createTodo(todo);
+	});
+};
+
 const handleSubmit = (e: SubmitEvent) => {
 	e.preventDefault();
-	const newTodoText = input.value;
+	const newTodo: Todo = {
+		text: input.value,
+		completed: false,
+	};
+	createTodo(newTodo);
+	todos.push(newTodo);
+	localStorage.setItem("todos", JSON.stringify(todos));
+	input.value = "";
+};
+
+const createTodo = (todo: Todo) => {
 	const newLi = document.createElement("li");
-	newLi.append(newTodoText);
+	newLi.append(todo.text);
 	list.appendChild(newLi);
 	const checkBox = document.createElement("input");
 	checkBox.type = "checkbox";
 	newLi.append(checkBox);
-	input.value = "";
 };
 
 form.addEventListener("submit", handleSubmit);
+document.addEventListener("DOMContentLoaded", initTodo);

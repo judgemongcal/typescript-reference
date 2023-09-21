@@ -13,15 +13,36 @@ const list = document.querySelector("#todo-list");
 // const numChars = (mystery as String).length; // Type Assertion just for this line
 // console.log(numChars);
 // Type Assertion in DOM
+const getTodos = () => {
+    const todosJSON = localStorage.getItem("todos");
+    if (todosJSON === null)
+        return [];
+    return JSON.parse(todosJSON);
+};
+const initTodo = () => {
+    const todos = getTodos();
+    todos.forEach((todo) => {
+        createTodo(todo);
+    });
+};
 const handleSubmit = (e) => {
     e.preventDefault();
-    const newTodoText = input.value;
+    const newTodo = {
+        text: input.value,
+        completed: false,
+    };
+    createTodo(newTodo);
+    todos.push(newTodo);
+    localStorage.setItem("todos", JSON.stringify(todos));
+    input.value = "";
+};
+const createTodo = (todo) => {
     const newLi = document.createElement("li");
-    newLi.append(newTodoText);
+    newLi.append(todo.text);
     list.appendChild(newLi);
     const checkBox = document.createElement("input");
     checkBox.type = "checkbox";
     newLi.append(checkBox);
-    input.value = "";
 };
 form.addEventListener("submit", handleSubmit);
+document.addEventListener("DOMContentLoaded", initTodo);
