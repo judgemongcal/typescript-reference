@@ -135,3 +135,29 @@ function makeNoise(animal) {
     }
     return "woof";
 }
+function getFarmAnimalSound(animal) {
+    switch (animal.kind) {
+        case "pig":
+            return "Oink";
+            break;
+        case "rooster":
+            return "Bok";
+            break;
+        case "cow":
+            return "Moo";
+            break;
+        case "sheep":
+            return "Baa";
+        default:
+            // Should never make it here if we handled all cases correctly
+            const _exhaustiveCheck = animal; // will show an error in case the cases/options are not fully exhausted
+            return _exhaustiveCheck;
+    }
+}
+const steve = {
+    name: "Steve",
+    weight: 2,
+    age: 4,
+    kind: "rooster",
+};
+console.log(getFarmAnimalSound(steve));

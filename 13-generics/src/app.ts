@@ -207,3 +207,64 @@ function makeNoise(animal: Cat | Dog): string {
 	}
 	return "woof";
 }
+
+// Discriminated Unions
+
+interface Rooster {
+	name: string;
+	weight: number;
+	age: number;
+	kind: "rooster"; //discriminator
+}
+
+interface Cow {
+	name: string;
+	weight: number;
+	age: number;
+	kind: "cow";
+}
+
+interface Pig {
+	name: string;
+	wieght: number;
+	age: number;
+	kind: "pig";
+}
+
+interface Sheep {
+	name: string;
+	wieght: number;
+	age: number;
+	kind: "sheep";
+}
+
+type FarmAnimal = Pig | Rooster | Cow | Sheep;
+
+function getFarmAnimalSound(animal: FarmAnimal) {
+	switch (animal.kind) {
+		case "pig":
+			return "Oink";
+			break;
+		case "rooster":
+			return "Bok";
+			break;
+		case "cow":
+			return "Moo";
+			break;
+		case "sheep":
+			return "Baa";
+		default:
+			// Should never make it here if we handled all cases correctly
+			const _exhaustiveCheck: never = animal; // will show an error in case the cases/options are not fully exhausted
+			return _exhaustiveCheck;
+	}
+}
+
+const steve: Rooster = {
+	name: "Steve",
+	weight: 2,
+	age: 4,
+	kind: "rooster",
+};
+
+console.log(getFarmAnimalSound(steve));
