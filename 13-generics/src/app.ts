@@ -161,3 +161,49 @@ console.log(
 );
 
 // Instanceof Type Narrowing
+
+function printFullDate(date: string | Date) {
+	if (date instanceof Date) {
+		console.log(date.toUTCString);
+	} else {
+		let newDate = new Date(date).toUTCString();
+		console.log(newDate);
+	}
+}
+
+class User {
+	constructor(public username: string) {}
+}
+
+class Company {
+	constructor(public name: string) {}
+}
+
+function printName(entity: User | Company) {
+	if (entity instanceof User) {
+		console.log("You are a user");
+	} else {
+		console.log("You are a company");
+	}
+}
+
+// Type Predicates
+interface Cat {
+	name: string;
+	numLives: number;
+}
+interface Dog {
+	name: string;
+	breed: string;
+}
+
+function isCat(animal: Cat | Dog): animal is Cat {
+	return (animal as Cat).numLives !== undefined;
+}
+
+function makeNoise(animal: Cat | Dog): string {
+	if (isCat(animal)) {
+		return "Meow";
+	}
+	return "woof";
+}

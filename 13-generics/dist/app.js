@@ -99,3 +99,39 @@ function getRuntime(show) {
 console.log(getRuntime({ title: "Amadeus", duration: 180 }));
 console.log(getRuntime({ title: "Suits", numEpisodes: 108, episodeDuration: 60 }));
 // Instanceof Type Narrowing
+function printFullDate(date) {
+    if (date instanceof Date) {
+        console.log(date.toUTCString);
+    }
+    else {
+        let newDate = new Date(date).toUTCString();
+        console.log(newDate);
+    }
+}
+class User {
+    constructor(username) {
+        this.username = username;
+    }
+}
+class Company {
+    constructor(name) {
+        this.name = name;
+    }
+}
+function printName(entity) {
+    if (entity instanceof User) {
+        console.log("You are a user");
+    }
+    else {
+        console.log("You are a company");
+    }
+}
+function isCat(animal) {
+    return animal.numLives !== undefined;
+}
+function makeNoise(animal) {
+    if (isCat(animal)) {
+        return "Meow";
+    }
+    return "woof";
+}
