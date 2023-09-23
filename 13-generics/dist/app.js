@@ -53,3 +53,30 @@ class VideoPlayList {
     }
 }
 const songs = new VideoPlayList();
+const video = new VideoPlayList();
+const vid = { title: "werwt", creator: "wrwrwr", resolution: "rwrwrw" };
+video.add(vid);
+// Type Narrowing
+function triple(val) {
+    if (typeof val === "string") {
+        // works with primitive types
+        return val.repeat(3);
+    }
+    return val * 3;
+}
+// Truthiness Guard
+const el = document.getElementById("idk");
+if (el) {
+    el; // el now becomes an HTMLElement type
+}
+else {
+    el; // el now becomes a null type
+}
+const printLetters = (word) => {
+    if (word) {
+        for (let char of word) {
+            console.log(char);
+        }
+    }
+    console.log("Not a string!");
+};
