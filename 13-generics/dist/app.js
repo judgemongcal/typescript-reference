@@ -80,3 +80,22 @@ const printLetters = (word) => {
     }
     console.log("Not a string!");
 };
+// Equality Narrowing
+function someDemo(x, y) {
+    if (x === y) {
+        console.log("Strings");
+    }
+    console.log(x, y);
+}
+someDemo("hello", "world");
+someDemo(333, true);
+someDemo(4, "four");
+function getRuntime(show) {
+    if ("numEpisodes" in show) {
+        return show.numEpisodes * show.episodeDuration;
+    }
+    return show.duration;
+}
+console.log(getRuntime({ title: "Amadeus", duration: 180 }));
+console.log(getRuntime({ title: "Suits", numEpisodes: 108, episodeDuration: 60 }));
+// Instanceof Type Narrowing

@@ -120,3 +120,44 @@ const printLetters = (word: string | null) => {
 
 	console.log("Not a string!");
 };
+
+// Equality Narrowing
+
+function someDemo(x: string | number, y: string | boolean) {
+	if (x === y) {
+		console.log("Strings");
+	}
+	console.log(x, y);
+}
+
+someDemo("hello", "world");
+someDemo(333, true);
+someDemo(4, "four");
+
+// Narrowing with In Operator
+
+interface Movie {
+	title: string;
+	duration: number;
+}
+
+interface TVShow {
+	title: string;
+	numEpisodes: number;
+	episodeDuration: number;
+}
+
+function getRuntime(show: Movie | TVShow) {
+	if ("numEpisodes" in show) {
+		return show.numEpisodes * show.episodeDuration;
+	}
+
+	return show.duration;
+}
+
+console.log(getRuntime({ title: "Amadeus", duration: 180 }));
+console.log(
+	getRuntime({ title: "Suits", numEpisodes: 108, episodeDuration: 60 }),
+);
+
+// Instanceof Type Narrowing
